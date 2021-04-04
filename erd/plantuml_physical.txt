@@ -1,0 +1,78 @@
+@startuml
+skinparam monochrome true
+
+entity Subject{
+*PK subjName: VARCHAR
+--
+}
+
+entity Student{
+*PK outid: VARCHAR
+--
+*FK terId: INTEGER
+birth: INTEGER
+sex: VARCHAR
+}
+
+entity GeoLocation{
+*PK terId: INTEGER
+--
+RegName: VARCHAR
+AreaName: VARCHAR
+TerName: VARCHAR
+}
+
+entity EduInstitution{
+*PK institutionId: INTEGER
+--
+*FK terId: INTEGER
+*FK EOParent: VARCHAR
+EOName: VARCHAR
+EOTypeName: VARCHAR
+}
+
+entity EduInstitutionParent{
+*PK EOParent: VARCHAR
+--
+}
+
+entity ZnoInsitution{
+*PK PTName: VARCHAR
+--
+*FK terId: INTEGER
+}
+
+entity EducationLevel{
+*PK FK outid: VARCHAR
+*PK FK institutionId: INTEGER
+--
+ClassProfileName: VARCHAR
+ClassLangName: VARCHAR
+RegTypeName: VARCHAR
+}
+
+entity ZnoExam{
+*PK FK outid: VARCHAR
+*PK FK subjName: VARCHAR
+*PK examYear: INTEGER
+--
+*FK PTName: VARCHAR
+TestStatus: VARCHAR
+Ball100: REAL
+Ball12: REAL
+Ball: REAL
+examLanguage: VARCHAR
+DPALevel: VARCHAR
+AdaptScale: INTEGER
+}
+
+Student}|--||GeoLocation
+EduInstitution}|--||GeoLocation
+EducationLevel}|--||Student
+EducationLevel}|--||EduInstitution
+EduInstitution}|--||EduInstitutionParent
+ZnoInsitution}|--||GeoLocation
+ZnoExam}o--||Subject
+ZnoExam}|--||Student
+ZnoExam}|--||ZnoInsitution
+@enduml

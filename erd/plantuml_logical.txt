@@ -1,0 +1,78 @@
+@startuml
+skinparam monochrome true
+
+entity Subject{
+*subjName
+--
+}
+
+entity Student{
+*outid
+--
+*terId
+birth
+sex
+}
+
+entity GeoLocation{
+*terId
+--
+RegName
+AreaName
+TerName
+}
+
+entity EduInstitution{
+*institutionId
+--
+*terId
+*EOParent
+EOName
+EOTypeName
+}
+
+entity EduInstitutionParent{
+*EOParent
+--
+}
+
+entity ZnoInsitution{
+*PTName
+--
+*terId
+}
+
+entity EducationLevel{
+*outid
+*institutionId
+--
+ClassProfileName
+ClassLangName
+RegTypeName
+}
+
+entity ZnoExam{
+*outid
+*subjName
+*examYear
+--
+*PTName
+TestStatus
+Ball100
+Ball12
+Ball
+examLanguage
+DPALevel
+AdaptScale
+}
+
+Student}|--||GeoLocation
+EduInstitution}|--||GeoLocation
+EducationLevel}|--||Student
+EducationLevel}|--||EduInstitution
+EduInstitution}|--||EduInstitutionParent
+ZnoInsitution}|--||GeoLocation
+ZnoExam}o--||Subject
+ZnoExam}|--||Student
+ZnoExam}|--||ZnoInsitution
+@enduml
