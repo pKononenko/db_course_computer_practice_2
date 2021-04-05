@@ -64,8 +64,28 @@ INSERT INTO GEOLOCATION(RegName, AreaName, TerName)
 SELECT DISTINCT REGNAME, AREANAME, TERNAME
 FROM ZNODATA;
 
+
 INSERT INTO STUDENT(outid, terId, birth, sex)
 SELECT zd.outid, gl.terId, zd.birth, zd.sextypename
 FROM ZNODATA zd
 LEFT JOIN GEOLOCATION gl
 ON zd.areaname = gl.areaname AND zd.regname = gl.regname AND zd.tername = gl.tername;
+
+
+INSERT INTO ZNOINSTITUTION(PTName, terId)
+SELECT DISTINCT zd.EONAME, gl.terId
+FROM ZNODATA zd
+LEFT JOIN GEOLOCATION gl
+ON zd.EORegName = gl.regname AND zd.EOTerName = gl.regname AND zd.EOAreaName = gl.areaname
+WHERE zd.EONAME IS NOT NULL;
+
+
+INSERT INTO EDUINSTITUTION(terId, EOParent, EOName, EOTypeName)
+SELECT DISTINCT gl.terId, zd.EOParent, zd.EONAME, zd.EOTYPENAME
+FROM ZNODATA zd
+LEFT JOIN GEOLOCATION gl
+ON zd.EORegName = gl.regname AND zd.EOTerName = gl.regname AND zd.EOAreaName = gl.areaname
+WHERE zd.EONAME IS NOT NULL;
+
+
+INSERT INTO 
