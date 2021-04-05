@@ -36,12 +36,6 @@ entity EduInstitutionParent{
 --
 }
 
-entity ZnoInsitution{
-*PTName
---
-*terId
-}
-
 entity EducationLevel{
 *outid
 *institutionId
@@ -56,7 +50,7 @@ entity ZnoExam{
 *subjName
 *examYear
 --
-*PTName
+*institutionId
 TestStatus
 Ball100
 Ball12
@@ -71,8 +65,7 @@ EduInstitution}|--||GeoLocation
 EducationLevel}|--||Student
 EducationLevel}|--||EduInstitution
 EduInstitution}|--||EduInstitutionParent
-ZnoInsitution}|--||GeoLocation
 ZnoExam}o--||Subject
 ZnoExam}|--||Student
-ZnoExam}|--||ZnoInsitution
+ZnoExam}|--||EduInstitution
 @enduml

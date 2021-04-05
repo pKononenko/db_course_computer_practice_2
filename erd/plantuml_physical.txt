@@ -36,12 +36,6 @@ entity EduInstitutionParent{
 --
 }
 
-entity ZnoInsitution{
-*PK PTName: VARCHAR
---
-*FK terId: INTEGER
-}
-
 entity EducationLevel{
 *PK FK outid: VARCHAR
 *PK FK institutionId: INTEGER
@@ -56,7 +50,7 @@ entity ZnoExam{
 *PK FK subjName: VARCHAR
 *PK examYear: INTEGER
 --
-*FK PTName: VARCHAR
+*FK institutionId: INTEGER
 TestStatus: VARCHAR
 Ball100: REAL
 Ball12: REAL
@@ -71,8 +65,7 @@ EduInstitution}|--||GeoLocation
 EducationLevel}|--||Student
 EducationLevel}|--||EduInstitution
 EduInstitution}|--||EduInstitutionParent
-ZnoInsitution}|--||GeoLocation
 ZnoExam}o--||Subject
 ZnoExam}|--||Student
-ZnoExam}|--||ZnoInsitution
+ZnoExam}|--||EduInstitution
 @enduml
