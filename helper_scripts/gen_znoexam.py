@@ -1,4 +1,17 @@
+# Простий скрипт для невеличкої автоматизації створення запиту
+
 test_list = ['ukr', 'hist', 'math', 'phys', 'chem', 'bio', 'geo', 'eng', 'fra', 'deu', 'spa']
+
+print("SUBJECT TABLE QUERY:\n")
+for t in test_list:
+    str_pattern = """INSERT INTO SUBJECT(subjName)
+    SELECT DISTINCT {}test
+    FROM ZNODATA
+    WHERE {t}test IS NOT NULL;"""
+
+    print(str_pattern.format(t, t), end = "\n\n")
+
+print("ZNOEXAM TABLE QUERY:\n")
 for t in test_list:
     str_pattern = """INSERT INTO ZNOEXAM(outid, subjName, examYear, PTName, TestStatus, 
         Ball100, Ball12, Ball, examLanguage, DPALevel, AdaptScale)
